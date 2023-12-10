@@ -15,7 +15,7 @@ module.exports.register = async (req, res, next) => {
       email,
       password: hashedPassword,
     });
-    delete User.password;
+    delete user.password;
     return res.json({ status: true, user });
   } catch (err) {
     next(err);

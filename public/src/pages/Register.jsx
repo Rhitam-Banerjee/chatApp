@@ -47,12 +47,11 @@ const Register = () => {
   // runs only when rules are checked out
   // sends data consisting of variables to api route
   // if there is error displays else saves the values as new user
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (handleValidation()) {
-      console.log("in Validation", registerRoute);
       const { username, email, password } = values;
-      const { data } = axios.post(registerRoute, {
+      const { data } = await axios.post(registerRoute, {
         username,
         email,
         password,
