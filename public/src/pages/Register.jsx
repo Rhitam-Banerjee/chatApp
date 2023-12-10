@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { blobBg, logoWhite } from "../assets";
 import { registerFormVariables } from "../constants";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
@@ -22,6 +22,11 @@ const Register = () => {
     draggable: true,
     theme: "dark",
   };
+  useEffect(() => {
+    if (localStorage.getItem("conext-user")) {
+      navigate("/");
+    }
+  }, []);
   // assignes changed values to created variables
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
@@ -35,18 +40,18 @@ const Register = () => {
         toastPreference
       );
       return false;
-    } else if (username.length < 3) {
-      toast.error("Username should be atleast 3 characters");
+    } else if (username.trim().length < 3) {
+      toast.error("Username should be atleast 3 characters", toastPreference);
       return false;
-    } else if (password < 8) {
-      toast.error("Password should be atleast 8 characters");
+    } else if (password.trim().length < 8) {
+      toast.error("Password should be atleast 8 characters", toastPreference);
       return false;
     }
     return true;
   };
   // runs only when rules are checked out
   // sends data consisting of variables to api route
-  // if there is error displays else saves the values as new user
+  // if there is error displays else saves the values as new user in DB and localStorage
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (handleValidation()) {
@@ -60,7 +65,7 @@ const Register = () => {
         toast.error(data.msg, toastPreference);
       }
       if (data.status === true) {
-        localStorage.setItem("app-user", JSON.stringify(data.user));
+        localStorage.setItem("conext-user", JSON.stringify(data.user));
         navigate("/");
       }
     }
@@ -90,13 +95,18 @@ const Register = () => {
               name={name}
               placeholder={placeHolder}
               onChange={(e) => handleChange(e)}
-              className="text-highlight w-full px-4 py-2 text-center outline-none backdrop-blur-sm rounded-md transition-all focus:border-b-[1px] focus:text-white focus:border-primary focus:bg-transparent focus:backdrop-blur-0"
+              className="w-full px-4 py-2 text-center outline-none backdrop-blur-sm rounded-md transition-all shadow-custom_1 text-white bg-transparent focus:text-highlight focus:bg-primary"
             />
           );
         })}
         <button
           type="submit"
-          className={`px-4 py-2 rounded-lg text-highlight bg-primary`}
+          className={`relative px-6 py-2 rounded-md text-highlight bg-primary shadow-custom_1
+          hover:text-primary hover:bg-transparent
+          before:-z-50 before:content-[''] before:text-highlight2 before:absolute 
+          before:top-0 before:left-0 before:w-full before:h-0
+          before:bg-highlight before:transition-all duration-2000 
+          hover:before:h-full`}
         >
           Create User
         </button>

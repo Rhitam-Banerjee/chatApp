@@ -20,3 +20,15 @@ export const registerFormVariables = [
     type: "password",
   },
 ];
+export const loginFormVariables = [
+  {
+    name: "username",
+    placeHolder: "Username",
+    type: "text",
+  },
+  {
+    name: "password",
+    placeHolder: "Password",
+    type: "password",
+  },
+];
