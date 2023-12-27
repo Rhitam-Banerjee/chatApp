@@ -6,6 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { loginRoute } from "../utils/API_routes";
+import { ButtonContainer } from "../components";
 const Register = () => {
   const navigate = useNavigate();
   const [values, setValues] = useState({
@@ -75,7 +76,7 @@ const Register = () => {
         onSubmit={(e) => handleSubmit(e)}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 
         h-1/2 max-w-sm flex flex-col gap-4 justify-around items-center text-primary
-         p-10 min-w-min rounded-xl shadow-lg bg-highlight_transparent backdrop-blur-sm"
+         p-10 min-w-min shadow-lg bg-highlight_transparent backdrop-blur-sm"
       >
         <div className="mb-4">
           <img src={logoWhite} alt="Logo" className="max-w-xs" />
@@ -89,24 +90,12 @@ const Register = () => {
               name={name}
               placeholder={placeHolder}
               onChange={(e) => handleChange(e)}
-              className="w-full px-4 py-2 text-center outline-none backdrop-blur-sm rounded-md
-              transition-all shadow-custom_1 text-secondary bg-transparent focus:text-highlight 
+              className="w-full px-4 py-2 text-center outline-none backdrop-blur-sm transition-all shadow-custom_1 text-secondary bg-transparent focus:text-highlight 
               focus:bg-primary"
             />
           );
         })}
-        <button
-          type="submit"
-          className={`
-          relative px-6 py-2 rounded-md text-highlight bg-primary shadow-custom_1
-          hover:text-primary hover:bg-transparent
-          before:-z-50 before:content-[''] before:text-highlight2 before:absolute 
-          before:top-0 before:left-0 before:w-full before:h-0
-          before:bg-highlight before:transition-all duration-2000 
-          hover:before:h-full`}
-        >
-          Login
-        </button>
+        <ButtonContainer text="Login" type="submit" />
         <span>
           Don&apos;t have an account ?
           <Link to="/register" className="text-highlight2 ml-2">
