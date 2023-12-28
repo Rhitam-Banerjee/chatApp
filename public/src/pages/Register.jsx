@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { blobBg, logoWhite } from "../assets";
+import { blobBg, loader, logoWhite } from "../assets";
 import { registerFormVariables } from "../constants";
 import { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
@@ -9,6 +9,7 @@ import { registerRoute } from "../utils/API_routes";
 import { ButtonContainer } from "../components";
 const Register = () => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -23,11 +24,7 @@ const Register = () => {
     draggable: true,
     theme: "dark",
   };
-  useEffect(() => {
-    if (localStorage.getItem("conext-user")) {
-      navigate("/");
-    }
-  }, []);
+
   // assignes changed values to created variables
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
@@ -67,11 +64,18 @@ const Register = () => {
       }
       if (data.status === true) {
         localStorage.setItem("conext-user", JSON.stringify(data.user));
-        navigate("/");
+        navigate("/setAvatar");
       }
     }
   };
-
+  useEffect(() => {
+    if (localStorage.getItem("conext-user")) {
+      navigate("/");
+    }
+  }, []);
+  useEffect(() => {
+    setIsLoading(false);
+  });
   return (
     <section
       className="absolute top-0 left-0 h-full w-full flex flex-col justify-center gap-4 items-center bg-no-repeat bg-cover bg-center"
@@ -79,36 +83,42 @@ const Register = () => {
         backgroundImage: `url(${blobBg})`,
       }}
     >
-      <form
-        action=""
-        onSubmit={(e) => handleSubmit(e)}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 h-3/4 max-w-sm flex flex-col gap-4 justify-around items-center text-primary p-10 min-w-min shadow-lg bg-highlight_transparent backdrop-blur-sm"
-      >
-        <div className="mb-4">
-          <img src={logoWhite} alt="Logo" className="max-w-xs" />
-        </div>
-        {registerFormVariables.map((inp) => {
-          const { name, placeHolder, type } = inp;
-          return (
-            <input
-              key={name}
-              type={type}
-              name={name}
-              placeholder={placeHolder}
-              onChange={(e) => handleChange(e)}
-              className="w-full px-4 py-2 text-center outline-none backdrop-blur-sm transition-all shadow-custom_1 text-white bg-transparent focus:text-highlight focus:bg-primary"
-            />
-          );
-        })}
-        <ButtonContainer text="Create User" type="submit" />
-        <span>
-          Already have an account ?
-          <Link to="/login" className="text-highlight2 ml-2">
-            Login
-          </Link>
-        </span>
-      </form>
-      <ToastContainer />
+      {isLoading ? (
+        <img src={loader} alt="loader" />
+      ) : (
+        <>
+          <form
+            action=""
+            onSubmit={(e) => handleSubmit(e)}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 h-3/4 max-w-sm flex flex-col gap-4 justify-around items-center text-primary p-10 min-w-min shadow-lg bg-highlight_transparent backdrop-blur-sm"
+          >
+            <div className="mb-4">
+              <img src={logoWhite} alt="Logo" className="max-w-xs" />
+            </div>
+            {registerFormVariables.map((inp) => {
+              const { name, placeHolder, type } = inp;
+              return (
+                <input
+                  key={name}
+                  type={type}
+                  name={name}
+                  placeholder={placeHolder}
+                  onChange={(e) => handleChange(e)}
+                  className="w-full px-4 py-2 text-center outline-none backdrop-blur-sm transition-all shadow-custom_1 text-white bg-transparent focus:text-highlight focus:bg-primary"
+                />
+              );
+            })}
+            <ButtonContainer text="Create User" type="submit" />
+            <span>
+              Already have an account ?
+              <Link to="/login" className="text-highlight2 ml-2">
+                Login
+              </Link>
+            </span>
+          </form>
+          <ToastContainer />
+        </>
+      )}
     </section>
   );
 };

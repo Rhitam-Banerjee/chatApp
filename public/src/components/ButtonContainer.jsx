@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 const ButtonContainer = ({ text, type, functionName }) => {
   return (
     <button

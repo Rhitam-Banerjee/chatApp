@@ -56,63 +56,63 @@ const SetAvatar = () => {
   useEffect(() => {
     runFunc();
   }, []);
+  useEffect(() => {
+    if (!localStorage.getItem("conext-user")) navigate("/login");
+  }, []);
   return (
     <>
-      {isLoading ? (
-        <section
-          style={{
-            backgroundImage: `url(${blobBg})`,
-          }}
-          className="absolute top-0 left-0 h-full w-full flex flex-col justify-center gap-4 items-center bg-no-repeat bg-cover bg-center"
-        >
+      <section
+        style={{
+          backgroundImage: `url(${blobBg})`,
+        }}
+        className="absolute top-0 left-0 h-full w-full flex flex-col justify-center gap-4 items-center bg-no-repeat bg-cover bg-center"
+      >
+        {isLoading ? (
           <img src={loader} alt="loader" />
-        </section>
-      ) : (
-        <section
-          style={{
-            backgroundImage: `url(${blobBg})`,
-          }}
-          className="absolute top-0 left-0 h-full w-full flex flex-col justify-center gap-4 items-center bg-no-repeat bg-cover bg-center"
-        >
-          <div className="p-10 flex flex-col sm:justify-center justify-evenly items-center bg-highlight_transparent backdrop-blur-lg lg:h-3/4 w-3/4 max-w-[700px]">
-            <div className="mb-4">
-              <img src={logoWhite} alt="Logo" className="max-w-xs" />
-            </div>
-            <div className="text-primary font-black">
-              <h1>Pick an Avatar</h1>
-            </div>
-            <div className="flex flex-row sm:flex-col items-center justify-center">
-              {avatars.map((avatar, index) => {
-                return (
-                  <div
-                    key={index}
-                    className={`${selectedAvatar === index ? "bg-white" : ""}`}
-                    style={{ clipPath: "circle(50%)" }}
-                  >
-                    <img
-                      src={`data:image/svg+xml;base64,${avatar}`}
-                      alt="avatar"
-                      className="m-2 w-[80px] bg-highlight2 cursor-pointer"
+        ) : (
+          <>
+            <div className="p-10 flex flex-col sm:justify-center justify-evenly items-center bg-highlight_transparent backdrop-blur-lg lg:h-3/4 w-3/4 max-w-[700px]">
+              <div className="mb-4">
+                <img src={logoWhite} alt="Logo" className="max-w-xs" />
+              </div>
+              <div className="text-primary font-black">
+                <h1>Pick an Avatar</h1>
+              </div>
+              <div className="flex flex-row sm:flex-col items-center justify-center">
+                {avatars.map((avatar, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className={`${
+                        selectedAvatar === index ? "bg-white" : ""
+                      }`}
                       style={{ clipPath: "circle(50%)" }}
-                      onClick={() => {
-                        setSelectedAvatar(index);
-                      }}
-                    />
-                  </div>
-                );
-              })}
+                    >
+                      <img
+                        src={`data:image/svg+xml;base64,${avatar}`}
+                        alt="avatar"
+                        className="m-2 w-[80px] bg-highlight2 cursor-pointer"
+                        style={{ clipPath: "circle(50%)" }}
+                        onClick={() => {
+                          setSelectedAvatar(index);
+                        }}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="flex flex-col">
+                <ButtonContainer text="Refresh Avatar" functionName={runFunc} />
+                <ButtonContainer
+                  text="Set Avatar"
+                  functionName={setProfilePicture}
+                />
+              </div>
             </div>
-            <div className="flex flex-col">
-              <ButtonContainer text="Refresh Avatar" functionName={runFunc} />
-              <ButtonContainer
-                text="Set Avatar"
-                functionName={setProfilePicture}
-              />
-            </div>
-          </div>
-          <ToastContainer />
-        </section>
-      )}
+            <ToastContainer />
+          </>
+        )}
+      </section>
     </>
   );
 };
