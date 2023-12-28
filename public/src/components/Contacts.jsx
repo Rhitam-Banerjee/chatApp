@@ -6,61 +6,69 @@ const Contacts = ({ contacts, currentUser }) => {
   const [currentUsername, setCurrentUsername] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentSelected, setCurrentSelected] = useState(undefined);
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 640px)");
+    setIsMobile(mediaQuery.matches);
+    const handleMediaQueryChange = (event) => {
+      setIsMobile(event.matches);
+    };
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaQueryChange);
+    };
+  }, []);
+
   useEffect(() => {
     if (currentUser) {
       setCurrentUsername(currentUser.username);
       setCurrentUserImage(currentUser.avatarImage);
     }
   }, [currentUser]);
-  // const changeCurrentChat = (index, contact) => {};
+  const changeCurrentChat = (index, contact) => {};
   return (
     <>
       {currentUsername && currentUserImage && (
-        <section className="relative text-white">
-          <div className="p-10">
+        <section className="grid grid-rows-[10%_75%_15%] overflow-hidden text-primary">
+          <div className="flex items-center justify-center gap-4 p-12 sm:p-3">
             <img src={logoWhite} alt="logo" />
           </div>
-          <div className="p-6">
+          <div className="mt-12 flex flex-col items-center overflow-auto gap-3 scrollbar">
             {contacts.map((contact, index) => {
               const { username, avatarImage } = contact;
               return (
                 <div
                   key={index}
                   className={`${
-                    index === currentSelected ? "" : ""
-                  } flex items-center justify-center`}
+                    index === currentSelected ? "bg-highlight" : ""
+                  } p-4 flex sm:block items-center hover:bg-highlight min-h-[5rem] w-full cursor-pointer gap-4`}
+                  onClick={() => changeCurrentChat(index, contact)}
                 >
-                  <div
-                    className="bg-highlight2 mr-5"
-                    style={{ clipPath: "circle(50%)" }}
-                  >
+                  <div className="">
                     <img
-                      className="w-[60px]"
+                      className="h-12"
                       src={`data:image/svg+xml;base64,${avatarImage}`}
                       alt=""
                     />
                   </div>
-                  <div>
-                    <h3>{username}</h3>
-                  </div>
+                  {!isMobile && (
+                    <div>
+                      <h3>{username}</h3>
+                    </div>
+                  )}
                 </div>
               );
             })}
           </div>
-          <div className="absolute bottom-0 left-0 p-6 w-full flex items-center justify-center bg-highlight">
-            <div
-              className="bg-highlight2 mr-5"
-              style={{ clipPath: "circle(50%)" }}
-            >
+          <div className="p-4 flex sm:block items-center gap-8 bg-highlight_transparent backdrop-blur-lg">
+            <div className="">
               <img
-                className="w-[60px]"
+                className="h-16"
                 src={`data:image/svg+xml;base64,${currentUserImage}`}
                 alt="profile image"
               />
             </div>
-            <div>
-              <h3>{currentUsername}</h3>
-            </div>
+            <div>{!isMobile && <h3>{currentUsername}</h3>}</div>
           </div>
         </section>
       )}

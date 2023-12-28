@@ -58,6 +58,7 @@ const SetAvatar = () => {
   }, []);
   useEffect(() => {
     if (!localStorage.getItem("conext-user")) navigate("/login");
+    // else if (localStorage.getItem("conext-user")) navigate("/");
   }, []);
   return (
     <>

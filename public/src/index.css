@@ -8,3 +8,13 @@
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
 }
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 0.2rem;
+  }
+  .scrollbar::-webkit-scrollbar-thumb {
+    background-color: #ffffff39;
+    width: 0.1rem;
+    border-radius: 1rem;
+  }
+}

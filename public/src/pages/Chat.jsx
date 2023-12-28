@@ -45,7 +45,7 @@ const Chat = () => {
         <img src={loader} alt="loader" />
       ) : (
         <>
-          <div className="grid lg:grid-cols-[25%_75%] grid-cols-[35%_65%] w-[90vw] h-[90vh] bg-highlight_transparent backdrop-blur-sm">
+          <div className="grid lg:grid-cols-[25%_75%] sm:grid-cols-[minmax(80px,_15%)_minmax(auto,_85%)] grid-cols-[35%_65%] w-[90vw] h-[90vh] bg-highlight_transparent backdrop-blur-sm">
             <Contacts contacts={contacts} currentUser={currentUser} />
             <div className="bg-highlight"></div>
           </div>
