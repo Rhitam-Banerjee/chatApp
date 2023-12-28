@@ -12,24 +12,30 @@ const Contacts = ({ contacts, currentUser }) => {
       setCurrentUserImage(currentUser.avatarImage);
     }
   }, [currentUser]);
-  const changeCurrentChat = (index, contact) => {};
+  // const changeCurrentChat = (index, contact) => {};
   return (
     <>
       {currentUsername && currentUserImage && (
-        <section className="p-10">
-          <div className="">
+        <section className="relative text-white">
+          <div className="p-10">
             <img src={logoWhite} alt="logo" />
           </div>
-          <div>
+          <div className="p-6">
             {contacts.map((contact, index) => {
               const { username, avatarImage } = contact;
               return (
                 <div
                   key={index}
-                  className={`${index === currentSelected ? "" : ""}`}
+                  className={`${
+                    index === currentSelected ? "" : ""
+                  } flex items-center justify-center`}
                 >
-                  <div>
+                  <div
+                    className="bg-highlight2 mr-5"
+                    style={{ clipPath: "circle(50%)" }}
+                  >
                     <img
+                      className="w-[60px]"
                       src={`data:image/svg+xml;base64,${avatarImage}`}
                       alt=""
                     />
@@ -40,6 +46,21 @@ const Contacts = ({ contacts, currentUser }) => {
                 </div>
               );
             })}
+          </div>
+          <div className="absolute bottom-0 left-0 p-6 w-full flex items-center justify-center bg-highlight">
+            <div
+              className="bg-highlight2 mr-5"
+              style={{ clipPath: "circle(50%)" }}
+            >
+              <img
+                className="w-[60px]"
+                src={`data:image/svg+xml;base64,${currentUserImage}`}
+                alt="profile image"
+              />
+            </div>
+            <div>
+              <h3>{currentUsername}</h3>
+            </div>
           </div>
         </section>
       )}

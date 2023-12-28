@@ -19,7 +19,7 @@ const Chat = () => {
     if (currentUser) {
       if (currentUser.isAvatarImageSet) {
         const { data } = await axios.get(`${allUserRoutes}/${currentUser._id}`);
-        setContacts(data.data);
+        setContacts(data);
       } else {
         navigate("/setAvatar");
       }
@@ -33,7 +33,7 @@ const Chat = () => {
   }, []);
   useEffect(() => {
     setIsLoading(false);
-  });
+  }, []);
   return (
     <section
       className="absolute top-0 left-0 h-full w-full flex flex-col justify-center gap-4 items-center bg-no-repeat bg-cover bg-center"
@@ -47,7 +47,7 @@ const Chat = () => {
         <>
           <div className="grid lg:grid-cols-[25%_75%] grid-cols-[35%_65%] w-[90vw] h-[90vh] bg-highlight_transparent backdrop-blur-sm">
             <Contacts contacts={contacts} currentUser={currentUser} />
-            <div className="bg-purple-500"></div>
+            <div className="bg-highlight"></div>
           </div>
         </>
       )}
