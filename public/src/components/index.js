@@ -1,2 +1,3 @@
 import ButtonContainer from "./ButtonContainer";
-export { ButtonContainer };
+import Contacts from "./Contacts";
+export { ButtonContainer, Contacts };
