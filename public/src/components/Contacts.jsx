@@ -2,11 +2,16 @@ import { useEffect, useState } from "react";
 import { logoWhite } from "../assets";
 
 /* eslint-disable react/prop-types */
-const Contacts = ({ contacts, currentUser }) => {
+const Contacts = ({ contacts, currentUser, changeChat }) => {
   const [currentUsername, setCurrentUsername] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentSelected, setCurrentSelected] = useState(undefined);
   const [isMobile, setIsMobile] = useState(false);
+
+  const changeCurrentChat = (index, contact) => {
+    setCurrentSelected(index);
+    changeChat(contact);
+  };
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 640px)");
     setIsMobile(mediaQuery.matches);
@@ -25,7 +30,6 @@ const Contacts = ({ contacts, currentUser }) => {
       setCurrentUserImage(currentUser.avatarImage);
     }
   }, [currentUser]);
-  const changeCurrentChat = (index, contact) => {};
   return (
     <>
       {currentUsername && currentUserImage && (
