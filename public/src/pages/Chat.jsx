@@ -3,7 +3,7 @@ import { blobBg, loader } from "../assets";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { allUserRoutes } from "../utils/API_routes";
-import { Contacts, Welcome } from "../components";
+import { ChatContainer, Contacts, Welcome } from "../components";
 const Chat = () => {
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
@@ -20,7 +20,6 @@ const Chat = () => {
       else {
         setCurrentUser(await JSON.parse(localStorage.getItem("conext-user")));
       }
-      console.log("inside run func");
     };
     runFunc();
   }, []);
@@ -37,7 +36,6 @@ const Chat = () => {
           navigate("/setAvatar");
         }
       }
-      console.log("inside contact func");
     };
     getContacts();
   }, [currentUser]);
@@ -57,8 +55,11 @@ const Chat = () => {
             currentUser={currentUser}
             changeChat={handleChatChange}
           />
-
-          <Welcome currentUser={currentUser} />
+          {currentChat === undefined ? (
+            <Welcome currentUser={currentUser} />
+          ) : (
+            <ChatContainer currentChat={currentChat} />
+          )}
         </div>
       )}
     </section>
