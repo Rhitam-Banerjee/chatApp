@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-const ButtonContainer = ({ text, type, functionName }) => {
+const ButtonContainer = ({ text, type, functionName = undefined }) => {
   return (
     <button
       type={type}
@@ -9,7 +9,9 @@ const ButtonContainer = ({ text, type, functionName }) => {
           before:top-0 before:left-0 before:w-full before:h-0
           before:bg-highlight before:transition-all duration-2000 
           hover:before:h-full`}
-      onClick={() => functionName()}
+      onClick={() => {
+        if (functionName) functionName();
+      }}
     >
       {text}
     </button>
