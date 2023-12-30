@@ -1,11 +1,12 @@
-import Logout from "./Logout";
-
 /* eslint-disable react/prop-types */
+import { ChatInput, Logout, Messages } from "./";
+
 const ChatContainer = ({ currentChat }) => {
   const { username, avatarImage } = currentChat;
+  const handleSendMessage = async (msg) => {};
   return (
     <section className="bg-highlight">
-      <div className="flex flex-col justify-center">
+      <div className="flex flex-col justify-center h-full">
         <div className="px-8 py-2 min-h-[92px] sm:min-h-[30px] text-primary flex flex-row items-center justify-between shadow-custom_2">
           <div className="flex flex-row items-center justify-center">
             <div className="mr-4 sm:hidden">
@@ -17,12 +18,10 @@ const ChatContainer = ({ currentChat }) => {
             </div>
             <h1 className="sm:text-[0.8rem]">{username}</h1>
           </div>
-          <div className="text-primary">
-            <Logout />
-          </div>
+          <Logout />
         </div>
-        <div></div>
-        <div></div>
+        <Messages />
+        <ChatInput handleSendMessage={handleSendMessage} />
       </div>
     </section>
   );

@@ -7,7 +7,11 @@ const Logout = () => {
     navigate("/login");
   };
   return (
-    <button title="Logout" onClick={() => handleClick()}>
+    <button
+      title="Logout"
+      onClick={() => handleClick()}
+      className="text-highlight2 drop-shadow-custom_3"
+    >
       <BiPowerOff />
     </button>
   );
