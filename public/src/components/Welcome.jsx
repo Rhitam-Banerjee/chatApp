@@ -4,7 +4,7 @@ import { welcome } from "../assets";
 const Welcome = ({ currentUser }) => {
   const { username } = currentUser;
   return (
-    <div className="bg-highlight flex flex-col items-center justify-center p-4">
+    <div className="bg-highlight flex flex-col items-center justify-center p-4 text-center">
       <div className="relative w-full h-full">
         <img
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"

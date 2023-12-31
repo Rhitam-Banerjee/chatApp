@@ -5,8 +5,8 @@ const ChatContainer = ({ currentChat }) => {
   const { username, avatarImage } = currentChat;
   const handleSendMessage = async (msg) => {};
   return (
-    <section className="bg-highlight flex flex-col justify-center h-full">
-      <div className="px-8 py-2 min-h-[92px] text-primary flex flex-row items-center justify-between shadow-custom_2">
+    <section className="bg-highlight flex flex-col justify-between h-full">
+      <div className="px-8 py-2 sm:px-2 text-primary flex flex-row items-center justify-between shadow-custom_2">
         <div className="flex flex-row items-center justify-center">
           <div className="mr-4 sm:hidden">
             <img

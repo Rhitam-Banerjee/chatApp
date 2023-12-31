@@ -18,3 +18,32 @@
     border-radius: 1rem;
   }
 }
+.emoji-catagories button {
+  filter: contrast(0) !important;
+}
+.epr-emoji-category-label {
+  color: white !important;
+  background-color: transparent !important;
+  backdrop-filter: blur(30px) !important;
+}
+/* .epr-category-nav > button.epr-cat-btn:hover {
+} */
+.epr-category-nav > button.epr-cat-btn:focus:before {
+  border: none !important;
+  border-radius: 0 !important;
+  width: 100%;
+  height: 1px;
+  background-color: red;
+  left: 50% !important;
+  bottom: 0 !important;
+  top: 100% !important;
+  right: 0 !important;
+  transform: translateX(-50%);
+}
+.epr-search {
+  border: 1px solid #daddd8 !important;
+  background-color: transparent !important;
+}
+.epr-preview {
+  border: none !important;
+}

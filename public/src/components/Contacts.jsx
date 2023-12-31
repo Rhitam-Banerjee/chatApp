@@ -34,10 +34,10 @@ const Contacts = ({ contacts, currentUser, changeChat }) => {
     <>
       {currentUsername && currentUserImage && (
         <section className="grid grid-rows-[10%_75%_15%] overflow-hidden text-primary">
-          <div className="flex items-center justify-center gap-4 p-12 sm:p-3">
+          <div className="flex items-center justify-center gap-4 p-12 sm:p-1">
             <img src={logoWhite} alt="logo" />
           </div>
-          <div className="mt-12 flex flex-col items-center overflow-auto gap-3 scrollbar">
+          <div className="mt-12 sm:mt-0 flex flex-col items-center overflow-auto gap-3 scrollbar">
             {contacts.map((contact, index) => {
               const { username, avatarImage } = contact;
               return (
@@ -45,7 +45,7 @@ const Contacts = ({ contacts, currentUser, changeChat }) => {
                   key={index}
                   className={`${
                     index === currentSelected ? "bg-highlight" : ""
-                  } p-4 w-full flex sm:grid items-center sm:place-items-center hover:bg-highlight min-h-[5rem] cursor-pointer gap-4`}
+                  } p-4 sm:p-1 w-full flex sm:grid items-center sm:place-items-center hover:bg-highlight min-h-[5rem] cursor-pointer gap-4`}
                   onClick={() => changeCurrentChat(index, contact)}
                 >
                   <div className="w-max">
@@ -64,7 +64,7 @@ const Contacts = ({ contacts, currentUser, changeChat }) => {
               );
             })}
           </div>
-          <div className="p-4 flex sm:block items-center gap-8 bg-highlight_transparent backdrop-blur-lg">
+          <div className="p-4 sm:p-1 flex items-center gap-8 bg-highlight_transparent backdrop-blur-lg">
             <div className="">
               <img
                 className="h-16 sm:h-12"
@@ -72,7 +72,7 @@ const Contacts = ({ contacts, currentUser, changeChat }) => {
                 alt="profile image"
               />
             </div>
-            <div>{!isMobile && <h3>{currentUsername}</h3>}</div>
+            {!isMobile && <h3>{currentUsername}</h3>}
           </div>
         </section>
       )}
