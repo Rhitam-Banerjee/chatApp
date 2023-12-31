@@ -45,12 +45,12 @@ const Contacts = ({ contacts, currentUser, changeChat }) => {
                   key={index}
                   className={`${
                     index === currentSelected ? "bg-highlight" : ""
-                  } p-4 flex sm:block items-center hover:bg-highlight min-h-[5rem] w-full cursor-pointer gap-4`}
+                  } p-4 w-full flex sm:grid items-center sm:place-items-center hover:bg-highlight min-h-[5rem] cursor-pointer gap-4`}
                   onClick={() => changeCurrentChat(index, contact)}
                 >
-                  <div className="">
+                  <div className="w-max">
                     <img
-                      className="h-12"
+                      className="h-12 sm:h-8"
                       src={`data:image/svg+xml;base64,${avatarImage}`}
                       alt=""
                     />
@@ -67,7 +67,7 @@ const Contacts = ({ contacts, currentUser, changeChat }) => {
           <div className="p-4 flex sm:block items-center gap-8 bg-highlight_transparent backdrop-blur-lg">
             <div className="">
               <img
-                className="h-16"
+                className="h-16 sm:h-12"
                 src={`data:image/svg+xml;base64,${currentUserImage}`}
                 alt="profile image"
               />

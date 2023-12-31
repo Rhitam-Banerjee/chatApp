@@ -20,7 +20,8 @@ export default {
         custom_2: "0 5px 10px rgba(238, 240, 242, 0.05)",
       },
       dropShadow: {
-        custom_3: "0 0 5px rgba(255, 255, 255, 1)",
+        custom_3_white: "0 0 5px rgba(255, 255, 255, 1)",
+        custom_3_red: "0 0 5px rgba(255, 0, 0, 1)",
       },
       screens: {
         xs: { max: "450px" },

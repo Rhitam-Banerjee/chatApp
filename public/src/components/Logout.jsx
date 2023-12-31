@@ -10,7 +10,7 @@ const Logout = () => {
     <button
       title="Logout"
       onClick={() => handleClick()}
-      className="text-highlight2 drop-shadow-custom_3"
+      className="text-highlight2 drop-shadow-custom_3_red"
     >
       <BiPowerOff />
     </button>
