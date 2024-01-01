@@ -7,10 +7,10 @@ require("dotenv").config();
 const app = express();
 app.use(
   cors({
-    origin: "https://chat-conext.vercel.app",
-    // origin: "https://chat-app-dusky-three.vercel.app",
+    origin: "*",
     methods: ["GET", "POST"],
     credentials: true,
+    allowedHeaders: [],
   })
 );
 app.use(express.json());
