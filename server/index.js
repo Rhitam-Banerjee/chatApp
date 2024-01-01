@@ -5,13 +5,13 @@ const userRoutes = require("./routes/userRoutes");
 require("dotenv").config();
 
 const app = express();
-// app.use(
-//   cors({
-//     origin: "https://chat-conext.vercel.app",
-//     methods: ["GET", "POST"],
-//     credentials: true,
-//   })
-// );
+app.use(
+  cors({
+    origin: "https://chat-conext.vercel.app",
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use("/api/auth", userRoutes);
 mongoose
