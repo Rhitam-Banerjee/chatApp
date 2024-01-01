@@ -1,4 +1,4 @@
-const host = "https://chat-conext.vercel.app";
+const host = "https://chat-app-dusky-three.vercel.app";
 // const host = "http://localhost:5000";
 export const registerRoute = `${host}/api/auth/register`;
 export const loginRoute = `${host}/api/auth/login`;
