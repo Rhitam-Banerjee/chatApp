@@ -83,7 +83,7 @@ const Register = () => {
             action=""
             onSubmit={(e) => handleSubmit(e)}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 
-        h-1/2 flex flex-col gap-4 justify-around items-center text-primary
+        h-3/4 flex flex-col gap-4 justify-around items-center text-primary
          p-10 min-w-[300px] max-w-[400px] shadow-lg bg-highlight_transparent backdrop-blur-sm"
           >
             <div className="mb-4">
