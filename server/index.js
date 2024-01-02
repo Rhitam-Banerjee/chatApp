@@ -23,7 +23,10 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-
+app.get("/check/", (req, res) => {
+  console.log("Works?");
+  res.send("Hello World");
+});
 const server = app.listen(process.env.PORT, () => {
   console.log("Started Server on " + process.env.PORT);
 });
