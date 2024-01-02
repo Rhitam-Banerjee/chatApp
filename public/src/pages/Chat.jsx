@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { blobBg, loader } from "../assets";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { allUserRoutes } from "../utils/API_routes";
+import { allUserRoutes, host } from "../utils/API_routes";
 import { ChatContainer, Contacts, Welcome } from "../components";
+import { io } from "socket.io-client";
 const Chat = () => {
+  const socket = useRef();
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -13,7 +15,12 @@ const Chat = () => {
   const handleChatChange = (chat) => {
     setCurrentChat(chat);
   };
-
+  useEffect(() => {
+    if (currentUser) {
+      socket.current = io(host);
+      socket.current.emit("add-user", currentUser._id);
+    }
+  }, [currentUser]);
   useEffect(() => {
     const runFunc = async () => {
       if (!localStorage.getItem("conext-user")) navigate("/login");
@@ -58,7 +65,11 @@ const Chat = () => {
           {currentChat === undefined ? (
             <Welcome currentUser={currentUser} />
           ) : (
-            <ChatContainer currentChat={currentChat} />
+            <ChatContainer
+              currentChat={currentChat}
+              currentUser={currentUser}
+              socket={socket}
+            />
           )}
         </div>
       )}

@@ -17,6 +17,10 @@ const ChatInput = ({ handleSendMessage }) => {
   };
   const sendChat = (event) => {
     event.preventDefault();
+    if (totalMessage.length > 0) {
+      handleSendMessage(totalMessage);
+      setTotalMessage("");
+    }
   };
   return (
     <section className="grid grid-cols-[5%_95%] items-center px-8 pb-6 sm:px-4 sm:pl-2 gap-4 sm:gap-3">
@@ -35,7 +39,7 @@ const ChatInput = ({ handleSendMessage }) => {
         </div>
       </div>
       <form
-        onSubmit={() => sendChat(event)}
+        onSubmit={(e) => sendChat(e)}
         className="w-full p-2 bg-transparent shadow-custom_1 flex flex-row justify-between items-center gap-4"
       >
         <input
