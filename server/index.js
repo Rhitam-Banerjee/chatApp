@@ -9,7 +9,7 @@ require("dotenv").config();
 const app = express();
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://conextchat.vercel.app",
     methods: ["POST", "GET"],
   })
 );
@@ -33,7 +33,7 @@ const server = app.listen(process.env.PORT, () => {
 });
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://conextchat.vercel.app",
     credentials: true,
   },
 });
