@@ -87,7 +87,7 @@ const Register = () => {
          p-10 min-w-min shadow-lg bg-highlight_transparent backdrop-blur-sm"
           >
             <div className="mb-4">
-              <img src={logoWhite} alt="Logo" className="max-w-xs" />
+              <img src={logoWhite} alt="Logo" className="w-[200px]" />
             </div>
             {loginFormVariables.map((inp) => {
               const { name, placeHolder, type } = inp;
