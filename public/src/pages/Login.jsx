@@ -84,7 +84,7 @@ const Register = () => {
             onSubmit={(e) => handleSubmit(e)}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 
         h-1/2 max-w-sm flex flex-col gap-4 justify-around items-center text-primary
-         p-10 min-w-min shadow-lg bg-highlight_transparent backdrop-blur-sm"
+         p-10 min-w-[300px] shadow-lg bg-highlight_transparent backdrop-blur-sm"
           >
             <div className="mb-4">
               <img src={logoWhite} alt="Logo" className="w-[200px]" />
@@ -104,7 +104,7 @@ const Register = () => {
               );
             })}
             <ButtonContainer text="Login" type="submit" />
-            <span>
+            <span className="text-center">
               Don&apos;t have an account ?
               <Link to="/register" className="text-highlight2 ml-2">
                 Register
