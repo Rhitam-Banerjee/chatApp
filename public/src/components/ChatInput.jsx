@@ -1,19 +1,27 @@
+/* eslint-disable react/prop-types */
 import Picker from "emoji-picker-react";
 import { IoMdSend } from "react-icons/io";
 import { BsEmojiSmileFill } from "react-icons/bs";
-import { useState } from "react";
+import { createRef, useEffect, useState } from "react";
 const ChatInput = ({ handleSendMessage }) => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [totalMessage, setTotalMessage] = useState("");
-
+  const [cursorPosition, setCursorPosition] = useState();
+  const inputRef = createRef();
   const handleEmojiPicker = () => {
     setShowEmojiPicker(!showEmojiPicker);
   };
-  const handleEmojiClick = (emojiObj, event) => {
-    console.log(emojiObj);
-    let message = totalMessage;
-    message += emojiObj.emoji;
+  const handleEmojiClick = (emojiObj) => {
+    const ref = inputRef.current;
+    ref.focus();
+    const start = totalMessage.substring(0, ref.selectionStart);
+    const end = totalMessage.substring(ref.selectionStart);
+    const message = start + emojiObj.emoji + end;
     setTotalMessage(message);
+    setCursorPosition(start.length + emojiObj.emoji.length);
+    // let message = totalMessage;
+    // message += emojiObj.emoji;
+    // setTotalMessage(message);
   };
   const sendChat = (event) => {
     event.preventDefault();
@@ -22,6 +30,10 @@ const ChatInput = ({ handleSendMessage }) => {
       setTotalMessage("");
     }
   };
+  useEffect(() => {
+    inputRef.current.selectionEnd = cursorPosition;
+    console.log("Running");
+  }, [cursorPosition, inputRef]);
   return (
     <section className="grid grid-cols-[5%_95%] items-center px-8 pb-6 sm:px-4 sm:pl-2 gap-4 sm:gap-3">
       <div className="flex items-center text-primary">
@@ -32,7 +44,7 @@ const ChatInput = ({ handleSendMessage }) => {
           />
           {showEmojiPicker && (
             <Picker
-              className="!absolute -top-[480px] sm:!left-[calc(50%_+_25px)] sm:!-translate-x-1/2 sm:!w-[300px] sm:!max-w-xs !bg-highlight_transparent !backdrop-blur-md !border-none shadow-custom_1"
+              className="!absolute -top-[480px] sm:-top-[400px] sm:!left-[calc(50%_+_105px)] sm:!-translate-x-1/2 sm:!w-[300px] sm:scale-75 sm:!max-w-xs !bg-highlight_transparent !backdrop-blur-md !border-none shadow-custom_1"
               onEmojiClick={handleEmojiClick}
             />
           )}
@@ -47,6 +59,7 @@ const ChatInput = ({ handleSendMessage }) => {
           placeholder="Type your message here"
           className="w-[90%] bg-transparent outline-none border-none pl-4 sm:pl-2 text-tertiary sm:text-[0.8rem]"
           value={totalMessage}
+          ref={inputRef}
           onChange={(e) => setTotalMessage(e.target.value)}
         />
         <button
