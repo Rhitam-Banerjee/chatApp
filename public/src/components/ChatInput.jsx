@@ -2,7 +2,7 @@
 import Picker from "emoji-picker-react";
 import { IoMdSend } from "react-icons/io";
 import { BsEmojiSmileFill } from "react-icons/bs";
-import { createRef, useEffect, useState } from "react";
+import { createRef, useState } from "react";
 const ChatInput = ({ handleSendMessage }) => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [totalMessage, setTotalMessage] = useState("");
@@ -30,10 +30,6 @@ const ChatInput = ({ handleSendMessage }) => {
       setTotalMessage("");
     }
   };
-  useEffect(() => {
-    inputRef.current.selectionEnd = cursorPosition;
-    console.log("Running");
-  }, [cursorPosition, inputRef]);
   return (
     <section className="grid grid-cols-[5%_95%] items-center px-8 pb-6 sm:px-4 sm:pl-2 gap-4 sm:gap-3">
       <div className="flex items-center text-primary">
